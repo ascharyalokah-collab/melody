@@ -7,6 +7,7 @@ import './OrderPage.css';
 
 const OrderPage = () => {
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
   const [formData, setFormData] = useState({
     whatsapp: '',
     mood: 'Romantic',
@@ -63,7 +64,7 @@ const OrderPage = () => {
     
     // 1. Create Order in Razorpay via Backend
     try {
-        const res = await axios.post('http://localhost:5000/api/create-order', { amount: totalPrice });
+        const res = await axios.post(`${API_URL}/api/create-order`, { amount: totalPrice });
         const { id: order_id, currency, amount } = res.data;
 
         // 2. Open Razorpay Popup
@@ -101,7 +102,7 @@ const OrderPage = () => {
                 // File uploads removed
 
                 try {
-                    const verifyRes = await axios.post('http://localhost:5000/api/verify-payment', data);
+                    const verifyRes = await axios.post(`${API_URL}/api/verify-payment`, data);
                     if (verifyRes.status === 201) {
                         navigate('/success');
                     } else {

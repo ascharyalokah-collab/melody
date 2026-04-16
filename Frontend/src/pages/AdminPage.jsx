@@ -4,6 +4,7 @@ import { LayoutDashboard, ShoppingCart, Users, DollarSign, Search, Filter, Eye, 
 import './AdminPage.css';
 
 const AdminPage = () => {
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [stats, setStats] = useState({ totalOrders: 0, revenue: 0, pendingOrders: 0 });
@@ -13,7 +14,7 @@ const AdminPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-        const res = await axios.post('http://localhost:5000/api/admin/login', loginData);
+        const res = await axios.post(`${API_URL}/api/admin/login`, loginData);
         if (res.status === 200) {
             setIsLoggedIn(true);
             fetchDashboardData();
@@ -26,9 +27,9 @@ const AdminPage = () => {
 
   const fetchDashboardData = async () => {
     try {
-        const statsRes = await axios.get('http://localhost:5000/api/admin/stats');
+        const statsRes = await axios.get(`${API_URL}/api/admin/stats`);
         setStats(statsRes.data);
-        const ordersRes = await axios.get('http://localhost:5000/api/admin/orders');
+        const ordersRes = await axios.get(`${API_URL}/api/admin/orders`);
         setOrders(ordersRes.data);
     } catch (err) {
         console.error(err);
@@ -37,7 +38,7 @@ const AdminPage = () => {
 
   const updateStatus = async (id, status) => {
     try {
-        await axios.put(`http://localhost:5000/api/admin/orders/${id}`, { orderStatus: status });
+        await axios.put(`${API_URL}/api/admin/orders/${id}`, { orderStatus: status });
         fetchDashboardData();
     } catch (err) {
         console.error(err);
