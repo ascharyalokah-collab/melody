@@ -12,15 +12,13 @@ const OrderPage = () => {
     mood: 'Romantic',
     occasion: '',
     date: '',
-    songType: 'Premium Song (₹2499)',
+    songType: 'Basic Song (₹999)',
     deliveryTime: '24 Hours',
-    language: 'English',
+    language: 'Telugu',
     artist: 'Male',
     story: '',
     specialLyrics: false,
-    specialLyricsText: '',
-    photos: [],
-    voiceNote: null
+    specialLyricsText: ''
   });
 
   const [addons, setAddons] = useState({
@@ -29,13 +27,13 @@ const OrderPage = () => {
     instrumental: false
   });
 
-  const [totalPrice, setTotalPrice] = useState(2499);
+  const [totalPrice, setTotalPrice] = useState(999);
 
   useEffect(() => {
     let price = 0;
-    if (formData.songType.includes('1499')) price = 1499;
-    else if (formData.songType.includes('2499')) price = 2499;
-    else if (formData.songType.includes('4999')) price = 4999;
+    if (formData.songType.includes('999')) price = 999;
+    else if (formData.songType.includes('1499')) price = 1499;
+    else if (formData.songType.includes('1699')) price = 1699;
 
     if (addons.coverArt) price += 199;
     if (addons.lyricalVideo) price += 299;
@@ -57,11 +55,7 @@ const OrderPage = () => {
   };
 
   const handleFileChange = (e) => {
-    if (e.target.name === 'photos') {
-      setFormData({ ...formData, photos: [...e.target.files].slice(0, 10) });
-    } else {
-      setFormData({ ...formData, voiceNote: e.target.files[0] });
-    }
+    // File uploads removed
   };
 
   const handleSubmit = async (e) => {
@@ -104,8 +98,7 @@ const OrderPage = () => {
                 if (addons.instrumental) selectedAddons.push({ name: 'Instrumental', price: 299 });
                 data.append('addons', JSON.stringify(selectedAddons));
 
-                formData.photos.forEach(photo => data.append('photos', photo));
-                if (formData.voiceNote) data.append('voiceNote', formData.voiceNote);
+                // File uploads removed
 
                 try {
                     const verifyRes = await axios.post('http://localhost:5000/api/verify-payment', data);
@@ -201,9 +194,9 @@ const OrderPage = () => {
             <div className="form-group">
               <label>Song Type & Pricing</label>
               <select name="songType" value={formData.songType} onChange={handleInputChange}>
-                <option>Basic Song (₹1499)</option>
-                <option>Premium Song (₹2499)</option>
-                <option>Studio Quality (₹4999)</option>
+                <option>Basic Song (₹999)</option>
+                <option>Song + Plus Slide Show (₹1499)</option>
+                <option>Song + Slideshow + Lyrics PDF (₹1699)</option>
               </select>
             </div>
 
@@ -234,10 +227,11 @@ const OrderPage = () => {
               <div className="form-group">
                 <label>Language</label>
                 <select name="language" value={formData.language} onChange={handleInputChange}>
-                  <option>English</option>
+                  <option>Telugu</option>
                   <option>Hindi</option>
-                  <option>Spanish</option>
-                  <option>French</option>
+                  <option>English</option>
+                  <option>Kannada</option>
+                  <option>Tamil</option>
                 </select>
               </div>
             </div>
@@ -293,16 +287,7 @@ const OrderPage = () => {
               </div>
             </div>
 
-            <div className="file-uploads">
-              <div className="file-group">
-                <label><Upload size={16} /> Photos (Max 10)</label>
-                <input type="file" name="photos" multiple accept="image/*" onChange={handleFileChange} />
-              </div>
-              <div className="file-group">
-                <label><Music size={16} /> Voice Note (Reference)</label>
-                <input type="file" name="voiceNote" accept="audio/*" onChange={handleFileChange} />
-              </div>
-            </div>
+            {/* File uploads removed */}
           </div>
         </div>
 

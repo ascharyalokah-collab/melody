@@ -116,12 +116,12 @@ const LandingPage = () => {
                 <div className="container">
                     <div className="section-title">
                         <h2>Choose Your Plan</h2>
-                        <p>Premium quality music for every budget.</p>
+                        <p>High-quality personalized music for every budget.</p>
                     </div>
                     <div className="pricing-grid">
                         <div className="price-card glass-card">
                             <h3>Basic</h3>
-                            <div className="price">₹1,499</div>
+                            <div className="price">₹999</div>
                             <ul>
                                 <li>1:30 Min Song</li>
                                 <li>AI Vocals</li>
@@ -132,28 +132,28 @@ const LandingPage = () => {
                         </div>
                         <div className="price-card glass-card featured">
                             <div className="popular-tag">Most Popular</div>
-                            <h3>Premium</h3>
-                            <div className="price">₹2,499</div>
+                            <h3>Song + Slideshow</h3>
+                            <div className="price">₹1,499</div>
                             <ul>
                                 <li>2:30 Min Song</li>
-                                <li>High-End AI Vocals</li>
+                                <li>Custom Slideshow</li>
                                 <li>24hr Delivery</li>
-                                <li>Personalized Hook</li>
                                 <li>HQ Audio</li>
+                                <li>Shareable Video</li>
                             </ul>
                             <Link to="/order" className="btn-primary">Get Started</Link>
                         </div>
                         <div className="price-card glass-card">
-                            <h3>Studio</h3>
-                            <div className="price">₹4,999</div>
+                            <h3>Complete Kit</h3>
+                            <div className="price">₹1,699</div>
                             <ul>
-                                <li>3:30 Min Song</li>
-                                <li>Semi-Human Vocals</li>
+                                <li>Full Song</li>
+                                <li>Slideshow Video</li>
+                                <li>Lyrics PDF</li>
                                 <li>12hr Priority Delivery</li>
-                                <li>Fully Custom Lyrics</li>
-                                <li>Social Media Kit</li>
+                                <li>Social Media Ready</li>
                             </ul>
-                            <Link to="/order" className="btn-outline">Go Studio</Link>
+                            <Link to="/order" className="btn-outline">Go Premium</Link>
                         </div>
                     </div>
                 </div>

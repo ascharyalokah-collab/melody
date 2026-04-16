@@ -4,14 +4,16 @@
   --primary: #FF4E50;
   --primary-hover: #e04446;
   --gradient: linear-gradient(135deg, #FF6A88 0%, #FF9472 100%);
-  --dark: #121212;
-  --dark-accent: #1e1e1e;
-  --light: #F5F5F7;
+  --dark: #FFFFFF;
+  --dark-accent: #F5F5F7;
+  --light: #121212;
+  --text-main: #1D1D1F;
+  --text-secondary: #86868B;
   --gray: #888888;
-  --glass: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-blur: blur(12px);
-  --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-blur: blur(20px);
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --heading-font: 'Poppins', 'Montserrat', sans-serif;
   --body-font: 'Inter', sans-serif;
@@ -26,7 +28,7 @@
 body {
   font-family: var(--body-font);
   background-color: var(--dark);
-  color: var(--light);
+  color: var(--text-main);
   overflow-x: hidden;
   line-height: 1.6;
 }

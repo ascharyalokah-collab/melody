@@ -12,7 +12,7 @@ const SuccessPage = () => {
             justifyContent: 'center',
             textAlign: 'center',
             padding: '20px',
-            background: 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%)'
+            background: '#ffffff'
         }}>
             <motion.div 
                 className="glass-card"
@@ -23,10 +23,9 @@ const SuccessPage = () => {
                     maxWidth: '550px',
                     padding: '50px 40px',
                     borderRadius: '24px',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    backdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+                    background: '#ffffff',
+                    border: '1px solid rgba(0, 0, 0, 0.05)',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.05)'
                 }}
             >
                 <motion.div 
@@ -73,7 +72,7 @@ const SuccessPage = () => {
                     Your song is being created <Music size={24} className="pulse-animation" />
                 </h3>
 
-                <p style={{ color: '#a1a1aa', fontSize: '1.1rem', marginBottom: '40px', lineHeight: '1.6' }}>
+                <p style={{ color: '#666', fontSize: '1.1rem', marginBottom: '40px', lineHeight: '1.6' }}>
                     Our AI and world-class artists are now hard at work crafting your personalized melody. 
                     You will receive a WhatsApp message with the first draft within 24-48 hours.
                 </p>
@@ -102,9 +101,9 @@ const SuccessPage = () => {
                     
                     <button className="btn-outline" style={{
                         padding: '12px 24px',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        color: 'white',
+                        border: '1px solid rgba(0, 0, 0, 0.1)',
+                        background: '#f8f9fa',
+                        color: '#333',
                         borderRadius: '12px',
                         fontWeight: '600',
                         display: 'flex',
@@ -116,8 +115,8 @@ const SuccessPage = () => {
                     </button>
                 </div>
 
-                <div style={{ marginTop: '30px', color: '#71717a', fontSize: '0.85rem' }}>
-                    Order ID: <span style={{ color: '#e4e4e7' }}>#ORD-{Math.floor(Math.random() * 1000000)}</span>
+                <div style={{ marginTop: '30px', color: '#888', fontSize: '0.85rem' }}>
+                    Order ID: <span style={{ color: '#333' }}>#ORD-{Math.floor(Math.random() * 1000000)}</span>
                 </div>
             </motion.div>
         </div>

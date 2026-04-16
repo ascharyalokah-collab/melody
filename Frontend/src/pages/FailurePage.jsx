@@ -12,7 +12,7 @@ const FailurePage = () => {
             justifyContent: 'center',
             textAlign: 'center',
             padding: '20px',
-            background: 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%)'
+            background: '#ffffff'
         }}>
             <motion.div 
                 className="glass-card"
@@ -23,10 +23,9 @@ const FailurePage = () => {
                     maxWidth: '500px',
                     padding: '40px',
                     borderRadius: '24px',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    backdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+                    background: '#ffffff',
+                    border: '1px solid rgba(0, 0, 0, 0.05)',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.05)'
                 }}
             >
                 <motion.div 
@@ -49,7 +48,7 @@ const FailurePage = () => {
                     Payment Failed
                 </h1>
                 
-                <p style={{ color: '#a1a1aa', fontSize: '1.1rem', marginBottom: '30px', lineHeight: '1.6' }}>
+                <p style={{ color: '#666', fontSize: '1.1rem', marginBottom: '30px', lineHeight: '1.6' }}>
                     Oops! Something went wrong with your transaction. Don't worry, no money was deducted from your account. 
                 </p>
 
@@ -76,9 +75,9 @@ const FailurePage = () => {
                     
                     <a href="https://wa.me/your_number" className="btn-outline" style={{
                         padding: '12px 24px',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        color: 'white',
+                        border: '1px solid rgba(0, 0, 0, 0.1)',
+                        background: '#f8f9fa',
+                        color: '#333',
                         borderRadius: '12px',
                         fontWeight: '600',
                         textDecoration: 'none',
@@ -91,7 +90,7 @@ const FailurePage = () => {
                     </a>
                     
                     <Link to="/" style={{ 
-                        color: '#71717a', 
+                        color: '#888', 
                         textDecoration: 'none', 
                         fontSize: '0.9rem',
                         marginTop: '10px'

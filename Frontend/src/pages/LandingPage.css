@@ -11,13 +11,13 @@
 
 .song-card:hover {
   transform: translateY(-10px);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .song-img {
   width: 100%;
   aspect-ratio: 1;
-  background: #1e1e1e;
+  background: #f0f0f0;
   border-radius: 12px;
   margin-bottom: 20px;
   position: relative;
@@ -139,7 +139,7 @@
 .step-num {
   font-size: 5rem;
   font-weight: 900;
-  color: rgba(255, 78, 80, 0.05);
+  color: rgba(255, 78, 80, 0.08);
   position: absolute;
   top: -40px;
   left: 50%;
@@ -191,7 +191,7 @@
 .price-card ul {
   list-style: none;
   margin-bottom: 40px;
-  color: #ccc;
+  color: var(--text-secondary);
 }
 
 .price-card li { margin-bottom: 12px; }
@@ -212,8 +212,9 @@
   display: flex;
   align-items: center;
   padding: 60px;
-  background: linear-gradient(rgba(18,18,18,0.8), rgba(18,18,18,0.8)), url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80');
+  background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80');
   background-size: cover;
+  border-radius: 30px;
   overflow: hidden;
 }
 
@@ -233,7 +234,7 @@
 .phone-mock {
   width: 250px;
   height: 500px;
-  background: #1e1e1e;
+  background: #f8f8f8;
   border: 8px solid #333;
   border-radius: 40px;
 }

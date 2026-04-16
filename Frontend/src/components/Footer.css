@@ -1,7 +1,7 @@
 .footer {
-  background: #0a0a0a;
+  background: #fcfcfc;
   padding: 80px 0 30px;
-  border-top: 1px solid var(--glass-border);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .footer-grid {
@@ -56,18 +56,18 @@
 
 .newsletter-form input {
   flex: 1;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
+  background: #f0f0f0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   padding: 10px 15px;
   border-radius: 8px;
-  color: white;
+  color: var(--text-main);
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 30px;
-  border-top: 1px solid var(--glass-border);
-  color: #444;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  color: #888;
   font-size: 0.85rem;
 }
 
