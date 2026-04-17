@@ -2,6 +2,7 @@ import React from 'react';
 import { Music } from 'lucide-react';
 import { FaInstagram, FaTwitter, FaFacebook, FaYoutube } from 'react-icons/fa';
 import logoImg from '../assets/M4ULOGO.png';
+import './Footer.css';
 
 const Footer = () => {
   return (
