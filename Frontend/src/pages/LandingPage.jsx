@@ -14,19 +14,19 @@ import audioFive from '../assets/audio-five.mpeg';
 import audioSix from '../assets/audio-six.mpeg';
 
 // Image Imports
-import songOneImg from '../assets/song-one.png';
 import songTwoImg from '../assets/song-two.png';
 import songThreeImg from '../assets/song-three.png';
 import songFourImg from '../assets/song-four.png';
 import songFiveImg from '../assets/song-five.png';
 import songSixImg from '../assets/song-six.png';
+import sonBirthdayImg from '../assets/son-birthday.png';
 
 const LandingPage = () => {
     const [playingId, setPlayingId] = useState(null);
     const audioRef = useRef(null);
 
     const trendingSongs = [
-        { id: 1, title: 'True Love Story', genre: 'Romantic Pop', audio: audioOne, image: songOneImg, stats: '1.2k Creations', tags: '#Anniversary #Love' },
+        { id: 1, title: 'Birthday Special for My Son', genre: 'Upbeat Celebration', audio: audioOne, image: sonBirthdayImg, stats: '3.2k Creations', tags: '#Birthday #Son' },
         { id: 2, title: 'Forever Together', genre: 'Soulful Melody', audio: audioTwo, image: songTwoImg, stats: '840 Creations', tags: '#Wedding #Forever' },
         { id: 3, title: 'Sweet Memories', genre: 'Acoustic Folk', audio: audioThree, image: songThreeImg, stats: '2.1k Creations', tags: '#Nostalgia #Family' },
         { id: 4, title: 'Modern Soul', genre: 'Modern R&B', audio: audioFour, image: songFourImg, stats: '1.5k Creations', tags: '#Birthday #Fun' },
@@ -199,25 +199,7 @@ const LandingPage = () => {
                 </div>
             </section>
 
-             {/* App Download */}
-             <section className="app-download">
-                <div className="container">
-                    <div className="app-card glass-card">
-                        <div className="app-text">
-                            <h2>Melody in Your Pocket</h2>
-                            <p>Download our app to track your orders, chat with artists, and listen to your songs anywhere.</p>
-                            <div className="app-btns">
-                                <button className="btn-dark">App Store</button>
-                                <button className="btn-dark">Google Play</button>
-                            </div>
-                        </div>
-                        <div className="app-img">
-                            {/* Visual representation of phone */}
-                            <div className="phone-mock"></div>
-                        </div>
-                    </div>
-                </div>
-             </section>
+
         </div>
     );
 };
