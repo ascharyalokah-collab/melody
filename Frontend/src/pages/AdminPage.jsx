@@ -4,12 +4,14 @@ import { LayoutDashboard, ShoppingCart, Users, DollarSign, Search, Filter, Eye, 
 import './AdminPage.css';
 
 const AdminPage = () => {
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const API_URL = import.meta.env.VITE_API_URL || 'https://melody-yjff.onrender.com';
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [stats, setStats] = useState({ totalOrders: 0, revenue: 0, pendingOrders: 0 });
   const [orders, setOrders] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -42,6 +44,25 @@ const AdminPage = () => {
         fetchDashboardData();
     } catch (err) {
         console.error(err);
+    }
+  };
+
+  const downloadFiles = (order) => {
+    if (order.photos && order.photos.length > 0) {
+      order.photos.forEach((path, index) => {
+        const link = document.createElement('a');
+        link.href = `${API_URL}/${path}`;
+        link.download = `photo_${index}_${order.whatsappNumber}`;
+        link.target = "_blank";
+        link.click();
+      });
+    }
+    if (order.voiceNote) {
+      const link = document.createElement('a');
+      link.href = `${API_URL}/${order.voiceNote}`;
+      link.download = `voicenote_${order.whatsappNumber}`;
+      link.target = "_blank";
+      link.click();
     }
   };
 
@@ -145,7 +166,7 @@ const AdminPage = () => {
                   <th>WhatsApp</th>
                   <th>Mood</th>
                   <th>Date</th>
-                  <th>Song Type</th>
+                  <th>Language</th>
                   <th>Price</th>
                   <th>Payment</th>
                   <th>Status</th>
@@ -158,7 +179,7 @@ const AdminPage = () => {
                     <td>{order.whatsappNumber}</td>
                     <td>{order.mood}</td>
                     <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                    <td>{order.songType.split('(')[0]}</td>
+                    <td>{order.language}</td>
                     <td>₹{order.totalPrice}</td>
                     <td><span className="badge-paid">Paid</span></td>
                     <td>
@@ -174,8 +195,8 @@ const AdminPage = () => {
                     </td>
                     <td>
                       <div className="action-btns">
-                        <button title="View Details"><Eye size={16} /></button>
-                        <button title="Download Files"><Download size={16} /></button>
+                        <button title="View Details" onClick={() => { setSelectedOrder(order); setShowModal(true); }}><Eye size={16} /></button>
+                        <button title="Download Files" onClick={() => downloadFiles(order)}><Download size={16} /></button>
                       </div>
                     </td>
                   </tr>
@@ -184,6 +205,30 @@ const AdminPage = () => {
             </table>
           </div>
         </section>
+
+        {showModal && selectedOrder && (
+          <div className="modal-overlay">
+            <div className="modal-content glass-card">
+              <div className="modal-header">
+                <h2>Order Details</h2>
+                <button className="close-btn" onClick={() => setShowModal(false)}>&times;</button>
+              </div>
+              <div className="modal-body">
+                <div className="detail-item"><strong>WhatsApp:</strong> {selectedOrder.whatsappNumber}</div>
+                <div className="detail-item"><strong>Mood:</strong> {selectedOrder.mood}</div>
+                <div className="detail-item"><strong>Occasion:</strong> {selectedOrder.occasion || 'N/A'}</div>
+                <div className="detail-item"><strong>Song Type:</strong> {selectedOrder.songType}</div>
+                <div className="detail-item"><strong>Language:</strong> {selectedOrder.language}</div>
+                <div className="detail-item"><strong>Artist:</strong> {selectedOrder.preferredArtist}</div>
+                <div className="detail-item"><strong>Story:</strong> <p>{selectedOrder.story}</p></div>
+                <div className="detail-item"><strong>Special Lyrics:</strong> <p>{selectedOrder.specialLyrics || 'None'}</p></div>
+                <div className="detail-item"><strong>Delivery Time:</strong> {selectedOrder.deliveryTime}</div>
+                <div className="detail-item"><strong>Total Price:</strong> ₹{selectedOrder.totalPrice}</div>
+                <div className="detail-item"><strong>Add-ons:</strong> {selectedOrder.addons.map(a => a.name).join(', ') || 'None'}</div>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

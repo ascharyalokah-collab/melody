@@ -14,11 +14,11 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:5174', credentials: true }));
+app.use(cors({ origin: ['http://localhost:5174', 'https://melody-five-omega.vercel.app'], credentials: true }));
 app.use('/uploads', express.static('uploads'));
 
 // MongoDB Connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/melody_made';
+const MONGODB_URI = process.env.MONGODB_URI;
 
 mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 5000 })
     .then(async () => {
@@ -32,7 +32,7 @@ mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 5000 })
                 console.log('MongoDB Connected to Local');
                 await seedAdmin();
             })
-            .catch(e => console.error('All MongoDB connections failed. Login will be restricted.'));
+            .catch(e => console.error('All MongoDB connections failed.'));
     });
 
 async function seedAdmin() {
@@ -70,9 +70,9 @@ if (!fs.existsSync('uploads')) {
 // 1. Create Razorpay Order
 app.post('/api/create-order', async (req, res) => {
     try {
-        const { amount } = req.body; // Amount in INR
+        const { amount } = req.body; 
         const options = {
-            amount: amount * 100, // convert to paise
+            amount: Math.round(amount * 100), // convert to paise
             currency: "INR",
             receipt: `receipt_${Date.now()}`,
         };
@@ -112,7 +112,7 @@ app.post('/api/verify-payment', upload.fields([
         // Verify Signature
         const sign = razorpay_order_id + "|" + razorpay_payment_id;
         const expectedSign = crypto
-            .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET || 'secret_placeholder')
+            .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
             .update(sign.toString())
             .digest("hex");
 
@@ -121,8 +121,8 @@ app.post('/api/verify-payment', upload.fields([
         }
 
         // Process Files
-        const photoPaths = req.files['photos'] ? req.files['photos'].map(f => f.path) : [];
-        const voiceNotePath = req.files['voiceNote'] ? req.files['voiceNote'][0].path : null;
+        const photoPaths = req.files['photos'] ? req.files['photos'].map(f => f.path.replace(/\\/g, '/')) : [];
+        const voiceNotePath = req.files['voiceNote'] ? req.files['voiceNote'][0].path.replace(/\\/g, '/') : null;
 
         // Save Order
         const newOrder = new Order({
@@ -139,7 +139,7 @@ app.post('/api/verify-payment', upload.fields([
             addons: JSON.parse(addons || '[]'),
             photos: photoPaths,
             voiceNote: voiceNotePath,
-            totalPrice,
+            totalPrice: Number(totalPrice),
             razorpayOrderId: razorpay_order_id,
             razorpayPaymentId: razorpay_payment_id,
             razorpaySignature: razorpay_signature,
@@ -151,7 +151,7 @@ app.post('/api/verify-payment', upload.fields([
 
     } catch (error) {
         console.error('Error verifying payment:', error);
-        res.status(500).json({ message: "Server error" });
+        res.status(500).json({ message: "Server error: " + error.message });
     }
 });
 

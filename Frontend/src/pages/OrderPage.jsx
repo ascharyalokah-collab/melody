@@ -7,7 +7,7 @@ import './OrderPage.css';
 
 const OrderPage = () => {
   const navigate = useNavigate();
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const API_URL = import.meta.env.VITE_API_URL || 'https://melody-yjff.onrender.com';
   const [formData, setFormData] = useState({
     whatsapp: '',
     mood: 'Romantic',
@@ -26,6 +26,11 @@ const OrderPage = () => {
     coverArt: false,
     lyricalVideo: false,
     instrumental: false
+  });
+
+  const [files, setFiles] = useState({
+    photos: [],
+    voiceNote: null
   });
 
   const [totalPrice, setTotalPrice] = useState(999);
@@ -56,7 +61,12 @@ const OrderPage = () => {
   };
 
   const handleFileChange = (e) => {
-    // File uploads removed
+    const { name, files: selectedFiles } = e.target;
+    if (name === 'photos') {
+      setFiles({ ...files, photos: Array.from(selectedFiles) });
+    } else {
+      setFiles({ ...files, voiceNote: selectedFiles[0] });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -69,7 +79,7 @@ const OrderPage = () => {
 
         // 2. Open Razorpay Popup
         const options = {
-            key: "rzp_test_Sdiu91cqm55ZCe", // Razorpay Key ID from user
+            key: import.meta.env.VITE_RAZORPAY_KEY_ID,
             amount: amount,
             currency: currency,
             name: "MelodyMadeForYou",
@@ -99,10 +109,18 @@ const OrderPage = () => {
                 if (addons.instrumental) selectedAddons.push({ name: 'Instrumental', price: 299 });
                 data.append('addons', JSON.stringify(selectedAddons));
 
-                // File uploads removed
+                // Append Files
+                files.photos.forEach(file => {
+                  data.append('photos', file);
+                });
+                if (files.voiceNote) {
+                  data.append('voiceNote', files.voiceNote);
+                }
 
                 try {
-                    const verifyRes = await axios.post(`${API_URL}/api/verify-payment`, data);
+                    const verifyRes = await axios.post(`${API_URL}/api/verify-payment`, data, {
+                      headers: { 'Content-Type': 'multipart/form-data' }
+                    });
                     if (verifyRes.status === 201) {
                         navigate('/success');
                     } else {
@@ -288,7 +306,32 @@ const OrderPage = () => {
               </div>
             </div>
 
-            {/* File uploads removed */}
+            <div className="form-group">
+               <label><Upload size={18} /> Upload Photos (Max 10)</label>
+               <input 
+                 type="file" 
+                 name="photos" 
+                 multiple 
+                 accept="image/*"
+                 onChange={handleFileChange}
+               />
+               <small className="file-info">
+                 {files.photos.length > 0 ? `${files.photos.length} photos selected` : 'Select your favorite memories'}
+               </small>
+            </div>
+
+            <div className="form-group">
+               <label><Music size={18} /> Upload Voice Note (Optional)</label>
+               <input 
+                 type="file" 
+                 name="voiceNote" 
+                 accept="audio/*"
+                 onChange={handleFileChange}
+               />
+               <small className="file-info">
+                 {files.voiceNote ? files.voiceNote.name : 'Share a special message or tone'}
+               </small>
+            </div>
           </div>
         </div>
 
