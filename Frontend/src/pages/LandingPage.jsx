@@ -1,14 +1,49 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Hero from '../components/Hero';
 import { motion } from 'framer-motion';
-import { Play, Star, Heart, Cake, Gift, Clock, Shield, CheckCircle } from 'lucide-react';
+import { Play, Pause, Star, Heart, Cake, Gift, Clock, Shield, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './LandingPage.css';
 
+// Audio Imports
+import audioOne from '../assets/audio-one.mpeg';
+import audioTwo from '../assets/audio-two.mpeg';
+import audioThree from '../assets/audio-three.mpeg';
+import audioFour from '../assets/audio-four.mpeg';
+import audioFive from '../assets/audio-five.mpeg';
+import audioSix from '../assets/audio-six.mpeg';
+
 const LandingPage = () => {
+    const [playingId, setPlayingId] = useState(null);
+    const audioRef = useRef(null);
+
+    const trendingSongs = [
+        { id: 1, title: 'True Love Story', genre: 'Romantic Pop', audio: audioOne, stats: '1.2k Creations', tags: '#Anniversary #Love' },
+        { id: 2, title: 'Forever Together', genre: 'Soulful Melody', audio: audioTwo, stats: '840 Creations', tags: '#Wedding #Forever' },
+        { id: 3, title: 'Sweet Memories', genre: 'Acoustic Folk', audio: audioThree, stats: '2.1k Creations', tags: '#Nostalgia #Family' },
+        { id: 4, title: 'Modern Soul', genre: 'Modern R&B', audio: audioFour, stats: '1.5k Creations', tags: '#Birthday #Fun' },
+        { id: 5, title: 'Wedding Waltz', genre: 'Classical Fusion', audio: audioFive, stats: '900 Creations', tags: '#Marriage #Dance' },
+        { id: 6, title: 'Life Journey', genre: 'Inspirational Pop', audio: audioSix, stats: '1.7k Creations', tags: '#Success #Path' },
+    ];
+
+    const togglePlay = (song) => {
+        if (playingId === song.id) {
+            audioRef.current.pause();
+            setPlayingId(null);
+        } else {
+            if (audioRef.current) {
+                audioRef.current.src = song.audio;
+                audioRef.current.play();
+            }
+            setPlayingId(song.id);
+        }
+    };
+
     return (
         <div className="landing-page">
             <Hero />
+
+            <audio ref={audioRef} onEnded={() => setPlayingId(null)} />
 
             {/* Trending Songs Section */}
             <section id="trending" className="trending">
@@ -18,16 +53,25 @@ const LandingPage = () => {
                         <p>Hear what others have created with their stories.</p>
                     </div>
                     <div className="trending-grid">
-                        {[1, 2, 3].map((i) => (
-                            <div key={i} className="song-card glass-card">
-                                <div className="song-img">
-                                    <div className="play-btn"><Play fill="currentColor" /></div>
+                        {trendingSongs.map((song) => (
+                            <div key={song.id} className="song-card glass-card">
+                                <div className="song-img" onClick={() => togglePlay(song)}>
+                                    <div className={`play-btn ${playingId === song.id ? 'playing' : ''}`}>
+                                        {playingId === song.id ? <Pause fill="currentColor" /> : <Play fill="currentColor" />}
+                                    </div>
+                                    <div className="visualizer">
+                                        {playingId === song.id && (
+                                            <div className="bars">
+                                                <span></span><span></span><span></span><span></span>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                                <h3>Memory of Us</h3>
-                                <p>Romantic Pop • 3:24</p>
+                                <h3>{song.title}</h3>
+                                <p>{song.genre}</p>
                                 <div className="song-footer">
-                                    <span className="views">1.2k Creations</span>
-                                    <div className="tags">#Love #Anniversary</div>
+                                    <span className="views">{song.stats}</span>
+                                    <div className="tags">{song.tags}</div>
                                 </div>
                             </div>
                         ))}
