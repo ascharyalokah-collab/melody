@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { LayoutDashboard, ShoppingCart, Users, DollarSign, Search, Filter, Eye, Download } from 'lucide-react';
+import logoImg from '../assets/M4ULOGO.png';
 import './AdminPage.css';
 
 const AdminPage = () => {
   const API_URL = import.meta.env.VITE_API_URL || 'https://melody-yjff.onrender.com';
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [stats, setStats] = useState({ totalOrders: 0, revenue: 0, pendingOrders: 0 });
   const [orders, setOrders] = useState([]);
@@ -70,6 +72,9 @@ const AdminPage = () => {
     return (
       <div className="admin-login-container">
         <form className="admin-login-form glass-card" onSubmit={handleLogin}>
+          <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+             <img src={logoImg} alt="Logo" style={{ height: '60px' }} />
+          </div>
           <h2>Admin Login</h2>
           <div className="form-group">
             <label>Username</label>
@@ -97,52 +102,72 @@ const AdminPage = () => {
     <div className="admin-dashboard">
       <aside className="admin-sidebar">
         <div className="sidebar-logo">
-          Melody<span>Admin</span>
+           <img src={logoImg} alt="Melody M4U" style={{ height: '50px' }} />
         </div>
         <nav>
-          <div className="nav-item active"><LayoutDashboard size={20} /> Dashboard</div>
-          <div className="nav-item"><ShoppingCart size={20} /> Orders</div>
-          <div className="nav-item"><Users size={20} /> Customers</div>
+          <div className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+            <LayoutDashboard size={20} /> Dashboard
+          </div>
+          <div className={`nav-item ${activeTab === 'orders' ? 'active' : ''}`} onClick={() => setActiveTab('orders')}>
+            <ShoppingCart size={20} /> Orders
+          </div>
+          <div className={`nav-item ${activeTab === 'customers' ? 'active' : ''}`} onClick={() => setActiveTab('customers')}>
+            <Users size={20} /> Customers
+          </div>
         </nav>
       </aside>
 
       <main className="admin-main">
         <header className="admin-header">
-          <h1>Dashboard Overview</h1>
+          <div className="header-left">
+            <img src={logoImg} alt="M4U" style={{ height: '40px', marginRight: '15px' }} />
+            <h1>Admin Dashboard</h1>
+          </div>
           <div className="admin-user">Admin User</div>
         </header>
 
-        <section className="stats-grid">
-          <div className="stat-card glass-card">
-            <div className="stat-icon" style={{ background: 'rgba(255, 78, 80, 0.1)', color: '#FF4E50' }}>
-              <ShoppingCart size={24} />
-            </div>
-            <div>
-              <h3>{stats.totalOrders}</h3>
-              <p>Total Orders</p>
-            </div>
-          </div>
-          <div className="stat-card glass-card">
-            <div className="stat-icon" style={{ background: 'rgba(34, 197, 94, 0.1)', color: '#22c55e' }}>
-              <DollarSign size={24} />
-            </div>
-            <div>
-              <h3>₹{stats.revenue}</h3>
-              <p>Total Revenue</p>
-            </div>
-          </div>
-          <div className="stat-card glass-card">
-            <div className="stat-icon" style={{ background: 'rgba(234, 179, 8, 0.1)', color: '#eab308' }}>
-              <LayoutDashboard size={24} />
-            </div>
-            <div>
-              <h3>{stats.pendingOrders}</h3>
-              <p>Pending Orders</p>
-            </div>
-          </div>
-        </section>
+        {activeTab === 'dashboard' && (
+          <>
+            <section className="stats-grid">
+              <div className="stat-card glass-card">
+                <div className="stat-icon" style={{ background: 'rgba(255, 78, 80, 0.1)', color: '#FF4E50' }}>
+                  <ShoppingCart size={24} />
+                </div>
+                <div>
+                  <h3>{stats.totalOrders}</h3>
+                  <p>Total Orders</p>
+                </div>
+              </div>
+              <div className="stat-card glass-card">
+                <div className="stat-icon" style={{ background: 'rgba(34, 197, 94, 0.1)', color: '#22c55e' }}>
+                  <DollarSign size={24} />
+                </div>
+                <div>
+                  <h3>₹{stats.revenue}</h3>
+                  <p>Total Revenue</p>
+                </div>
+              </div>
+              <div className="stat-card glass-card">
+                <div className="stat-icon" style={{ background: 'rgba(234, 179, 8, 0.1)', color: '#eab308' }}>
+                  <LayoutDashboard size={24} />
+                </div>
+                <div>
+                  <h3>{stats.pendingOrders}</h3>
+                  <p>Pending Orders</p>
+                </div>
+              </div>
+            </section>
+            
+            <section className="orders-section glass-card">
+               <div className="orders-header">
+                 <h2>Performance Summary</h2>
+               </div>
+               <p style={{ color: 'var(--gray)' }}>Welcome back to your administration panel. Here you can manage all incoming song requests and track your business growth.</p>
+            </section>
+          </>
+        )}
 
-        <section className="orders-section glass-card">
+        {(activeTab === 'orders' || activeTab === 'dashboard') && activeTab !== 'customers' && (
           <div className="orders-header">
             <h2>Recent Orders</h2>
             <div className="orders-actions">
@@ -205,6 +230,37 @@ const AdminPage = () => {
             </table>
           </div>
         </section>
+
+        {activeTab === 'customers' && (
+          <section className="orders-section glass-card">
+            <div className="orders-header">
+              <h2>Customer Base</h2>
+            </div>
+            <div className="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>WhatsApp Number</th>
+                    <th>Total Orders</th>
+                    <th>Last Order</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Array.from(new Set(orders.map(o => o.whatsappNumber))).map(phone => {
+                    const customerOrders = orders.filter(o => o.whatsappNumber === phone);
+                    return (
+                      <tr key={phone}>
+                        <td>{phone}</td>
+                        <td>{customerOrders.length}</td>
+                        <td>{new Date(customerOrders[customerOrders.length-1].createdAt).toLocaleDateString()}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        )}
 
         {showModal && selectedOrder && (
           <div className="modal-overlay">
