@@ -53,6 +53,10 @@
 }
 
 .play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 70px;
   height: 70px;
   background: white;
@@ -61,23 +65,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.9;
-  transform: scale(1);
+  opacity: 0.95;
   transition: var(--transition);
-  z-index: 3;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .play-btn.playing {
-  opacity: 1;
   background: var(--primary);
   color: white;
-  transform: scale(1.1);
 }
 
 .song-card:hover .play-btn {
+  transform: translate(-50%, -50%) scale(1.1);
   opacity: 1;
-  transform: scale(1.05);
 }
 
 .visualizer {
