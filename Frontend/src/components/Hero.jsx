@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Play, Mic2, Star } from 'lucide-react';
+import { Play, Mic2, Star, Music } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './Hero.css';
 
@@ -54,8 +54,10 @@ const Hero = () => {
         >
           <div className="image-wrapper">
              <div className="ai-overlay"></div>
-             {/* Note: In a real app, I'd use the generated image path */}
              <div className="glow-sphere"></div>
+             <div className="hero-symbol-container">
+                <Music size={120} color="white" fill="white" className="hero-song-symbol" />
+             </div>
           </div>
           <div className="floating-card glass-card">
             <Mic2 size={24} color="#FF4E50" />

@@ -28,7 +28,7 @@
 }
 
 .nav-logo-img {
-  height: 40px !important;
+  height: 52px !important;
   width: auto !important;
   object-fit: contain;
   transition: var(--transition);
@@ -36,7 +36,7 @@
 }
 
 .navbar.scrolled .nav-logo-img {
-  height: 32px !important;
+  height: 52px !important;
 }
 
 .nav-links {
