@@ -13,17 +13,25 @@ import audioFour from '../assets/audio-four.mpeg';
 import audioFive from '../assets/audio-five.mpeg';
 import audioSix from '../assets/audio-six.mpeg';
 
+// Image Imports
+import songOneImg from '../assets/song-one.png';
+import songTwoImg from '../assets/song-two.png';
+import songThreeImg from '../assets/song-three.png';
+import songFourImg from '../assets/song-four.png';
+import songFiveImg from '../assets/song-five.png';
+import songSixImg from '../assets/song-six.png';
+
 const LandingPage = () => {
     const [playingId, setPlayingId] = useState(null);
     const audioRef = useRef(null);
 
     const trendingSongs = [
-        { id: 1, title: 'True Love Story', genre: 'Romantic Pop', audio: audioOne, stats: '1.2k Creations', tags: '#Anniversary #Love' },
-        { id: 2, title: 'Forever Together', genre: 'Soulful Melody', audio: audioTwo, stats: '840 Creations', tags: '#Wedding #Forever' },
-        { id: 3, title: 'Sweet Memories', genre: 'Acoustic Folk', audio: audioThree, stats: '2.1k Creations', tags: '#Nostalgia #Family' },
-        { id: 4, title: 'Modern Soul', genre: 'Modern R&B', audio: audioFour, stats: '1.5k Creations', tags: '#Birthday #Fun' },
-        { id: 5, title: 'Wedding Waltz', genre: 'Classical Fusion', audio: audioFive, stats: '900 Creations', tags: '#Marriage #Dance' },
-        { id: 6, title: 'Life Journey', genre: 'Inspirational Pop', audio: audioSix, stats: '1.7k Creations', tags: '#Success #Path' },
+        { id: 1, title: 'True Love Story', genre: 'Romantic Pop', audio: audioOne, image: songOneImg, stats: '1.2k Creations', tags: '#Anniversary #Love' },
+        { id: 2, title: 'Forever Together', genre: 'Soulful Melody', audio: audioTwo, image: songTwoImg, stats: '840 Creations', tags: '#Wedding #Forever' },
+        { id: 3, title: 'Sweet Memories', genre: 'Acoustic Folk', audio: audioThree, image: songThreeImg, stats: '2.1k Creations', tags: '#Nostalgia #Family' },
+        { id: 4, title: 'Modern Soul', genre: 'Modern R&B', audio: audioFour, image: songFourImg, stats: '1.5k Creations', tags: '#Birthday #Fun' },
+        { id: 5, title: 'Wedding Waltz', genre: 'Classical Fusion', audio: audioFive, image: songFiveImg, stats: '900 Creations', tags: '#Marriage #Dance' },
+        { id: 6, title: 'Life Journey', genre: 'Inspirational Pop', audio: audioSix, image: songSixImg, stats: '1.7k Creations', tags: '#Success #Path' },
     ];
 
     const togglePlay = (song) => {
@@ -56,6 +64,8 @@ const LandingPage = () => {
                         {trendingSongs.map((song) => (
                             <div key={song.id} className="song-card glass-card">
                                 <div className="song-img" onClick={() => togglePlay(song)}>
+                                    <img src={song.image} alt={song.title} className="song-cover-img" />
+                                    <div className="overlay-dark"></div>
                                     <div className={`play-btn ${playingId === song.id ? 'playing' : ''}`}>
                                         {playingId === song.id ? <Pause fill="currentColor" /> : <Play fill="currentColor" />}
                                     </div>
