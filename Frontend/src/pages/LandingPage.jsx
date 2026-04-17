@@ -120,17 +120,17 @@ const LandingPage = () => {
                     </div>
                     <div className="cat-grid">
                         <div className="cat-card">
-                            <Heart size={40} color="#FF4E50" />
+                            <Heart size={40} />
                             <h3>Love & Romance</h3>
                             <p>Proposals, Anniversaries, Weddings</p>
                         </div>
                         <div className="cat-card">
-                            <Cake size={40} color="#FF4E50" />
+                            <Cake size={40} />
                             <h3>Birthdays</h3>
                             <p>Personalized birthday wishes in song</p>
                         </div>
                         <div className="cat-card">
-                            <Gift size={40} color="#FF4E50" />
+                            <Gift size={40} />
                             <h3>Surprises</h3>
                             <p>Farewells, Apologies, Thank You's</p>
                         </div>

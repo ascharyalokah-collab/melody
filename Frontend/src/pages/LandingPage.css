@@ -187,6 +187,12 @@
   transition: var(--transition);
 }
 
+.cat-card svg {
+  color: var(--primary);
+  margin-bottom: 20px;
+  transition: var(--transition);
+}
+
 .cat-card:hover {
   background: var(--primary);
   transform: translateY(-5px);
