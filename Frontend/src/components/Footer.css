@@ -11,6 +11,16 @@
   margin-bottom: 60px;
 }
 
+.footer-brand .logo {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo-img {
+  height: 60px;
+  width: auto;
+}
+
 .footer-brand p {
   color: var(--gray);
   margin: 20px 0;

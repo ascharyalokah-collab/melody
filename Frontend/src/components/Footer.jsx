@@ -1,7 +1,7 @@
 import React from 'react';
 import { Music } from 'lucide-react';
 import { FaInstagram, FaTwitter, FaFacebook, FaYoutube } from 'react-icons/fa';
-import './Footer.css';
+import logoImg from '../assets/M4ULOGO.png';
 
 const Footer = () => {
   return (
@@ -10,8 +10,7 @@ const Footer = () => {
         <div className="footer-grid">
           <div className="footer-brand">
             <div className="logo">
-              <Music size={32} color="#FF4E50" fill="#FF4E50" />
-              <span>MelodyMade<span>ForYou</span></span>
+              <img src={logoImg} alt="MelodyMadeForYou" className="footer-logo-img" />
             </div>
             <p>The world's first AI-powered personalized music platform. Crafting emotions into melodies.</p>
             <div className="social-links">

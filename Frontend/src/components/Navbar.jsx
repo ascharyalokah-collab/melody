@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Music, Menu, X } from 'lucide-react';
-import './Navbar.css';
+import logoImg from '../assets/M4ULOGO.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,8 +20,7 @@ const Navbar = () => {
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-content">
         <Link to="/" className="logo">
-          <Music size={32} color="#FF4E50" fill="#FF4E50" />
-          <span>MelodyMade<span>ForYou</span></span>
+          <img src={logoImg} alt="MelodyMadeForYou" className="nav-logo-img" />
         </Link>
 
         <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
