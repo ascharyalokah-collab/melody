@@ -28,13 +28,15 @@
 }
 
 .nav-logo-img {
-  height: 50px;
-  width: auto;
+  height: 40px !important;
+  width: auto !important;
+  object-fit: contain;
   transition: var(--transition);
+  display: block;
 }
 
 .navbar.scrolled .nav-logo-img {
-  height: 40px;
+  height: 32px !important;
 }
 
 .nav-links {

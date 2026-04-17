@@ -17,8 +17,9 @@
 }
 
 .footer-logo-img {
-  height: 60px;
-  width: auto;
+  height: 45px !important;
+  width: auto !important;
+  object-fit: contain;
 }
 
 .footer-brand p {
