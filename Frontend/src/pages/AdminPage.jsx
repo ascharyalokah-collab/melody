@@ -168,68 +168,70 @@ const AdminPage = () => {
         )}
 
         {(activeTab === 'orders' || activeTab === 'dashboard') && activeTab !== 'customers' && (
-          <div className="orders-header">
-            <h2>Recent Orders</h2>
-            <div className="orders-actions">
-              <div className="search-bar">
-                <Search size={18} />
-                <input 
-                    type="text" 
-                    placeholder="Search by WhatsApp..." 
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
+          <section className="orders-section glass-card">
+            <div className="orders-header">
+              <h2>Recent Orders</h2>
+              <div className="orders-actions">
+                <div className="search-bar">
+                  <Search size={18} />
+                  <input 
+                      type="text" 
+                      placeholder="Search by WhatsApp..." 
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+                <button className="btn-outline"><Filter size={18} /> Filter</button>
               </div>
-              <button className="btn-outline"><Filter size={18} /> Filter</button>
             </div>
-          </div>
 
-          <div className="table-responsive">
-            <table>
-              <thead>
-                <tr>
-                  <th>WhatsApp</th>
-                  <th>Mood</th>
-                  <th>Date</th>
-                  <th>Language</th>
-                  <th>Price</th>
-                  <th>Payment</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.filter(o => o.whatsappNumber.includes(searchTerm)).map(order => (
-                  <tr key={order._id}>
-                    <td>{order.whatsappNumber}</td>
-                    <td>{order.mood}</td>
-                    <td>{new Date(order.createdAt).toLocaleDateString()}</td>
-                    <td>{order.language}</td>
-                    <td>₹{order.totalPrice}</td>
-                    <td><span className="badge-paid">Paid</span></td>
-                    <td>
-                      <select 
-                        className={`status-select status-${order.orderStatus.toLowerCase().replace(' ', '-')}`}
-                        value={order.orderStatus}
-                        onChange={(e) => updateStatus(order._id, e.target.value)}
-                      >
-                        <option>Pending</option>
-                        <option>In Progress</option>
-                        <option>Completed</option>
-                      </select>
-                    </td>
-                    <td>
-                      <div className="action-btns">
-                        <button title="View Details" onClick={() => { setSelectedOrder(order); setShowModal(true); }}><Eye size={16} /></button>
-                        <button title="Download Files" onClick={() => downloadFiles(order)}><Download size={16} /></button>
-                      </div>
-                    </td>
+            <div className="table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>WhatsApp</th>
+                    <th>Mood</th>
+                    <th>Date</th>
+                    <th>Language</th>
+                    <th>Price</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
+                </thead>
+                <tbody>
+                  {orders.filter(o => o.whatsappNumber.includes(searchTerm)).map(order => (
+                    <tr key={order._id}>
+                      <td>{order.whatsappNumber}</td>
+                      <td>{order.mood}</td>
+                      <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                      <td>{order.language}</td>
+                      <td>₹{order.totalPrice}</td>
+                      <td><span className="badge-paid">Paid</span></td>
+                      <td>
+                        <select 
+                          className={`status-select status-${order.orderStatus.toLowerCase().replace(' ', '-')}`}
+                          value={order.orderStatus}
+                          onChange={(e) => updateStatus(order._id, e.target.value)}
+                        >
+                          <option>Pending</option>
+                          <option>In Progress</option>
+                          <option>Completed</option>
+                        </select>
+                      </td>
+                      <td>
+                        <div className="action-btns">
+                          <button title="View Details" onClick={() => { setSelectedOrder(order); setShowModal(true); }}><Eye size={16} /></button>
+                          <button title="Download Files" onClick={() => downloadFiles(order)}><Download size={16} /></button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        )}
 
         {activeTab === 'customers' && (
           <section className="orders-section glass-card">
