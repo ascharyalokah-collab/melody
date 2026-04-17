@@ -242,6 +242,19 @@
 @media (max-width: 992px) {
   .trending-grid, .cat-grid, .steps-container, .pricing-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   .app-card { flex-direction: column; text-align: center; padding: 40px 20px; }
+  .split-section { flex-direction: column; gap: 40px; text-align: center; }
+  .split-text h2 { font-size: 2rem; }
+  .section-title h2 { font-size: 2rem; }
+  section { padding: 60px 0; }
+  .container { padding: 0 20px; }
+}
+
+@media (max-width: 480px) {
+  .split-text h2, .section-title h2 { font-size: 1.8rem; }
+  .app-card { padding: 30px 15px; }
+  .cat-card, .price-card, .testimonial-card { padding: 30px 20px; }
+  .container { padding: 0 15px; }
 }
