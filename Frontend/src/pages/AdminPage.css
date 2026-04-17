@@ -74,6 +74,36 @@
   align-items: center;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.admin-user {
+  font-weight: 600;
+  color: #333;
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.btn-logout:hover {
+  background: #fff5f5;
+  color: var(--primary);
+  border-color: rgba(255, 78, 80, 0.2);
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

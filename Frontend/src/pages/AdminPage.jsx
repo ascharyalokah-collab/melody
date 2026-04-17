@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { LayoutDashboard, ShoppingCart, Users, DollarSign, Search, Filter, Eye, Download } from 'lucide-react';
+import { LayoutDashboard, ShoppingCart, Users, DollarSign, Search, Filter, Eye, Download, LogOut } from 'lucide-react';
 import logoImg from '../assets/M4ULOGO.png';
 import './AdminPage.css';
 
@@ -14,6 +14,12 @@ const AdminPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showModal, setShowModal] = useState(false);
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setActiveTab('dashboard');
+    setLoginData({ username: '', password: '' });
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -123,7 +129,13 @@ const AdminPage = () => {
             <img src={logoImg} alt="M4U" style={{ height: '40px', marginRight: '15px' }} />
             <h1>Admin Dashboard</h1>
           </div>
-          <div className="admin-user">Admin User</div>
+          <div className="header-right">
+            <div className="admin-user">Admin User</div>
+            <button className="btn-logout" onClick={handleLogout} title="Logout">
+              <LogOut size={18} />
+              <span>Logout</span>
+            </button>
+          </div>
         </header>
 
         {activeTab === 'dashboard' && (
