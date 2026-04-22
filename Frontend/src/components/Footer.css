@@ -59,6 +59,13 @@
   color: var(--primary);
 }
 
+.footer-links a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  width: 100%;
+}
+
 .newsletter-form {
   display: flex;
   gap: 10px;

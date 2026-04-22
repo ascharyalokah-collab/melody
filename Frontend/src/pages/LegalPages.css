@@ -1,0 +1,109 @@
+.legal-container {
+  max-width: 900px;
+  margin: 120px auto 100px;
+  padding: 60px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  color: #e0e0e0;
+  line-height: 1.7;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.legal-header {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.legal-header h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, #a5a5a5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.legal-header p {
+  color: #888;
+  font-size: 1.1rem;
+}
+
+.legal-content h2 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 40px 0 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legal-content h2::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 1.5rem;
+  background: var(--primary-color, #ff4d4d);
+  border-radius: 4px;
+}
+
+.legal-content p {
+  margin-bottom: 20px;
+  color: #bbb;
+}
+
+.legal-content ul {
+  margin-bottom: 25px;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.legal-content ul li {
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 25px;
+}
+
+.legal-content ul li::before {
+  content: "•";
+  color: var(--primary-color, #ff4d4d);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  position: absolute;
+  left: 0;
+}
+
+.legal-content .contact-info {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 16px;
+  margin-top: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legal-content .contact-info p {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legal-content .contact-info strong {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .legal-container {
+    margin: 100px 20px 60px;
+    padding: 30px;
+  }
+  
+  .legal-header h1 {
+    font-size: 2rem;
+  }
+}

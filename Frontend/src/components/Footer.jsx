@@ -1,7 +1,7 @@
 import React from 'react';
 import { Music } from 'lucide-react';
 import { FaInstagram, FaTwitter, FaFacebook, FaYoutube } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import logoImg from '../assets/M4ULOGO.png';
 import './Footer.css';
 
@@ -41,8 +41,9 @@ const Footer = () => {
             <ul>
               <li>Contact Us</li>
               <li>FAQ</li>
-              <li>Terms of Service</li>
-              <li>Privacy Policy</li>
+              <li><Link to="/terms-conditions">Terms & Conditions</Link></li>
+              <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+              <li><Link to="/refund-policy">Refund Policy</Link></li>
             </ul>
           </div>
 
