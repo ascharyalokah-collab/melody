@@ -14,7 +14,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: ['http://localhost:5174', 'https://melody-five-omega.vercel.app'], credentials: true }));
+app.use(cors({ origin: ['http://localhost:5174', 'https://melody-five-omega.vercel.app', 'https://melodymadeforyou.in', 'http://melodymadeforyou.in'], credentials: true }));
 app.use('/uploads', express.static('uploads'));
 
 // MongoDB Connection
