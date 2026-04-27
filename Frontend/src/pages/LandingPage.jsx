@@ -97,7 +97,7 @@ const LandingPage = () => {
                             <h2>AI Magic, <br />Human Soul.</h2>
                             <p>Our advanced AI analyzes your story, identifies emotional peaks, and composes a unique melody that perfectly captures the essence of your message. Then, our studio artists refine the vocals for that premium professional sound.</p>
                             <ul className="feature-list">
-                                <CheckCircle size={20} color="#e9619a" /> Unique Melodies for every story</li>
+                                <li><CheckCircle size={20} color="#e9619a" /> Unique Melodies for every story</li>
                                 <li><CheckCircle size={20} color="#e9619a" /> Emotional Intelligence processing</li>
                                 <li><CheckCircle size={20} color="#e9619a" /> Studio Grade Vocal layering</li>
                             </ul>
