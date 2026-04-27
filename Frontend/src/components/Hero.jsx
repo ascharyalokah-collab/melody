@@ -15,7 +15,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="badge">
-            <Star size={14} fill="#FF4E50" /> 
+            <Star size={14} fill="#e9619a" /> 
             <span>#1 AI Music Personalization Platform</span>
           </div>
           <h1>Your Story, <br /><span>Our Melody.</span></h1>
@@ -60,7 +60,7 @@ const Hero = () => {
              </div>
           </div>
           <div className="floating-card glass-card">
-            <Mic2 size={24} color="#FF4E50" />
+            <Mic2 size={24} color="#e9619a" />
             <div>
               <h5>Personalized for You</h5>
               <p>Studio Quality AI Vocals</p>

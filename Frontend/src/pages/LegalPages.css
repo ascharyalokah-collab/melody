@@ -43,7 +43,7 @@
   display: inline-block;
   width: 4px;
   height: 1.5rem;
-  background: var(--primary, #FF4E50);
+  background: var(--primary, #e9619a);
   border-radius: 4px;
 }
 
@@ -67,7 +67,7 @@
 
 .legal-content ul li::before {
   content: "•";
-  color: var(--primary, #FF4E50);
+  color: var(--primary, #e9619a);
   font-weight: bold;
   display: inline-block;
   width: 1em;

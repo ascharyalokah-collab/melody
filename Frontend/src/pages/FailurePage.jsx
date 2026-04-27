@@ -60,7 +60,7 @@ const FailurePage = () => {
                 }}>
                     <Link to="/order" className="btn-primary" style={{
                         padding: '12px 24px',
-                        background: 'linear-gradient(135deg, #FF4E50 0%, #F9D423 100%)',
+                        background: 'linear-gradient(135deg, #e9619a 0%, #f089b2 100%)',
                         color: 'white',
                         borderRadius: '12px',
                         fontWeight: '600',

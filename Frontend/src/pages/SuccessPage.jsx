@@ -60,7 +60,7 @@ const SuccessPage = () => {
                 </h1>
                 
                 <h3 style={{ 
-                    color: '#FF4E50', 
+                    color: '#e9619a', 
                     marginBottom: '20px', 
                     fontSize: '1.4rem', 
                     fontWeight: '600',
@@ -85,7 +85,7 @@ const SuccessPage = () => {
                 }}>
                     <Link to="/" className="btn-primary" style={{
                         padding: '14px 28px',
-                        background: 'linear-gradient(135deg, #FF4E50 0%, #F9D423 100%)',
+                        background: 'linear-gradient(135deg, #e9619a 0%, #f089b2 100%)',
                         color: 'white',
                         borderRadius: '14px',
                         fontWeight: '600',

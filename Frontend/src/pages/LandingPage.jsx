@@ -97,9 +97,9 @@ const LandingPage = () => {
                             <h2>AI Magic, <br />Human Soul.</h2>
                             <p>Our advanced AI analyzes your story, identifies emotional peaks, and composes a unique melody that perfectly captures the essence of your message. Then, our studio artists refine the vocals for that premium professional sound.</p>
                             <ul className="feature-list">
-                                <li><CheckCircle size={20} color="#FF4E50" /> Unique Melodies for every story</li>
-                                <li><CheckCircle size={20} color="#FF4E50" /> Emotional Intelligence processing</li>
-                                <li><CheckCircle size={20} color="#FF4E50" /> Studio Grade Vocal layering</li>
+                                <CheckCircle size={20} color="#e9619a" /> Unique Melodies for every story</li>
+                                <li><CheckCircle size={20} color="#e9619a" /> Emotional Intelligence processing</li>
+                                <li><CheckCircle size={20} color="#e9619a" /> Studio Grade Vocal layering</li>
                             </ul>
                         </div>
                         <div className="split-visual">
@@ -175,22 +175,22 @@ const LandingPage = () => {
                     <div className="testimonial-slider">
                         <div className="testimonial-card glass-card">
                             <div className="stars">
-                                <Star fill="#FF4E50" size={16} />
-                                <Star fill="#FF4E50" size={16} />
-                                <Star fill="#FF4E50" size={16} />
-                                <Star fill="#FF4E50" size={16} />
-                                <Star fill="#FF4E50" size={16} />
+                                <Star fill="#e9619a" size={16} />
+                                <Star fill="#e9619a" size={16} />
+                                <Star fill="#e9619a" size={16} />
+                                <Star fill="#e9619a" size={16} />
+                                <Star fill="#e9619a" size={16} />
                             </div>
                             <p>"I made a song for my wife's 30th birthday and she was in tears. Most emotional gift ever!"</p>
                             <h4>— Rahul Sharma</h4>
                         </div>
                         <div className="testimonial-card glass-card">
                             <div className="stars">
-                                <Star fill="#FF4E50" size={16} />
-                                <Star fill="#FF4E50" size={16} />
-                                <Star fill="#FF4E50" size={16} />
-                                <Star fill="#FF4E50" size={16} />
-                                <Star fill="#FF4E50" size={16} />
+                                <Star fill="#e9619a" size={16} />
+                                <Star fill="#e9619a" size={16} />
+                                <Star fill="#e9619a" size={16} />
+                                <Star fill="#e9619a" size={16} />
+                                <Star fill="#e9619a" size={16} />
                             </div>
                             <p>"The quality is insane. It sounds like a real song you'd hear on Spotify."</p>
                             <h4>— Priya Malik</h4>

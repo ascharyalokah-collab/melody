@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary: #FF4E50;
-  --primary-hover: #e04446;
-  --gradient: linear-gradient(135deg, #FF6A88 0%, #FF9472 100%);
+  --primary: #e9619a;
+  --primary-hover: #d43f7d;
+  --gradient: linear-gradient(135deg, #e9619a 0%, #f089b2 100%);
   --dark: #FFFFFF;
   --dark-accent: #F5F5F7;
   --light: #121212;
@@ -64,12 +64,12 @@ button {
   border-radius: 50px;
   font-weight: 600;
   font-size: 1rem;
-  box-shadow: 0 4px 15px rgba(255, 78, 80, 0.4);
+  box-shadow: 0 4px 15px rgba(233, 97, 154, 0.4);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 78, 80, 0.6);
+  box-shadow: 0 8px 25px rgba(233, 97, 154, 0.6);
 }
 
 .glass-card {
@@ -123,8 +123,7 @@ section {
 }
 ::-webkit-scrollbar-thumb {
   background: var(--primary);
-  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary);
+  background: var(--primary-hover);
 }

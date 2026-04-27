@@ -135,7 +135,7 @@ const OrderPage = () => {
                 contact: formData.whatsapp,
             },
             theme: {
-                color: "#FF4E50",
+                color: "#e9619a",
             },
         };
 

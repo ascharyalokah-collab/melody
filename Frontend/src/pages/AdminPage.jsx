@@ -142,7 +142,7 @@ const AdminPage = () => {
           <>
             <section className="stats-grid">
               <div className="stat-card glass-card">
-                <div className="stat-icon" style={{ background: 'rgba(255, 78, 80, 0.1)', color: '#FF4E50' }}>
+                <div className="stat-icon" style={{ background: 'rgba(233, 97, 154, 0.1)', color: '#e9619a' }}>
                   <ShoppingCart size={24} />
                 </div>
                 <div>
