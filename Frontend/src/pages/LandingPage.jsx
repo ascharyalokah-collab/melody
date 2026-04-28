@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 import Hero from '../components/Hero';
 import { motion } from 'framer-motion';
 import { Play, Pause, Star, Heart, Cake, Gift, Clock, Shield, CheckCircle } from 'lucide-react';
@@ -24,6 +25,12 @@ import sonBirthdayImg from '../assets/son-birthday.png';
 const LandingPage = () => {
     const [playingId, setPlayingId] = useState(null);
     const audioRef = useRef(null);
+    const API_URL = import.meta.env.VITE_API_URL || 'https://melody-yjff.onrender.com';
+
+    useEffect(() => {
+        // Warm up the backend (Render free tier)
+        axios.get(`${API_URL}/api/admin/stats`).catch(() => {});
+    }, [API_URL]);
 
     const trendingSongs = [
         { id: 1, title: 'Birthday Special for My Son', genre: 'Upbeat Celebration', audio: audioOne, image: sonBirthdayImg, stats: '3.2k Creations', tags: '#Birthday #Son' },

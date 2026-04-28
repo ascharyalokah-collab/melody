@@ -21,6 +21,7 @@ const OrderPage = () => {
     specialLyrics: false,
     specialLyricsText: ''
   });
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const [addons, setAddons] = useState({
     coverArt: false,
@@ -61,6 +62,8 @@ const OrderPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isProcessing) return;
+    setIsProcessing(true);
     
     // 1. Create Order in Razorpay via Backend
     try {
@@ -135,6 +138,8 @@ const OrderPage = () => {
     } catch (err) {
         console.error(err);
         navigate('/failed');
+    } finally {
+        setIsProcessing(false);
     }
   };
 
@@ -299,8 +304,8 @@ const OrderPage = () => {
                 <span>Total Amount:</span>
                 <h2>₹{totalPrice}</h2>
             </div>
-            <button type="submit" className="btn-primary btn-large">
-                Get Your Song Now
+            <button type="submit" className="btn-primary btn-large" disabled={isProcessing}>
+                {isProcessing ? 'Processing Payment...' : 'Get Your Song Now'}
             </button>
         </div>
       </form>
