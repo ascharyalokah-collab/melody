@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { LayoutDashboard, ShoppingCart, Users, DollarSign, Search, Filter, Eye, Download, LogOut } from 'lucide-react';
+import { LayoutDashboard, ShoppingCart, Users, DollarSign, Search, Filter, Eye, Download, LogOut, Menu, X } from 'lucide-react';
 import logoImg from '../assets/M4ULOGO.png';
 import './AdminPage.css';
 
@@ -14,6 +14,7 @@ const AdminPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -105,28 +106,34 @@ const AdminPage = () => {
   }
 
   return (
-    <div className="admin-dashboard">
+    <div className={`admin-dashboard ${isSidebarOpen ? 'is-sidebar-open' : ''}`}>
       <aside className="admin-sidebar">
-        <div className="sidebar-logo">
-           <img src={logoImg} alt="Melody M4U" style={{ height: '50px' }} />
+        <div className="sidebar-header">
+            <img src={logoImg} alt="Melody M4U" style={{ height: '50px' }} />
+           <button className="mobile-close" onClick={() => setIsSidebarOpen(false)}><X size={24} /></button>
         </div>
         <nav>
-          <div className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+          <div className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => { setActiveTab('dashboard'); setIsSidebarOpen(false); }}>
             <LayoutDashboard size={20} /> Dashboard
           </div>
-          <div className={`nav-item ${activeTab === 'orders' ? 'active' : ''}`} onClick={() => setActiveTab('orders')}>
+          <div className={`nav-item ${activeTab === 'orders' ? 'active' : ''}`} onClick={() => { setActiveTab('orders'); setIsSidebarOpen(false); }}>
             <ShoppingCart size={20} /> Orders
           </div>
-          <div className={`nav-item ${activeTab === 'customers' ? 'active' : ''}`} onClick={() => setActiveTab('customers')}>
+          <div className={`nav-item ${activeTab === 'customers' ? 'active' : ''}`} onClick={() => { setActiveTab('customers'); setIsSidebarOpen(false); }}>
             <Users size={20} /> Customers
           </div>
         </nav>
       </aside>
 
+      {isSidebarOpen && <div className="sidebar-overlay" onClick={() => setIsSidebarOpen(false)}></div>}
+
       <main className="admin-main">
         <header className="admin-header">
           <div className="header-left">
-            <img src={logoImg} alt="M4U" style={{ height: '40px', marginRight: '15px' }} />
+            <button className="mobile-menu-btn" onClick={() => setIsSidebarOpen(true)}>
+              <Menu size={24} />
+            </button>
+            <img src={logoImg} alt="M4U" className="header-logo" />
             <h1>Admin Dashboard</h1>
           </div>
           <div className="header-right">
@@ -198,7 +205,7 @@ const AdminPage = () => {
             </div>
 
             <div className="table-responsive">
-              <table>
+              <table className="desktop-table">
                 <thead>
                   <tr>
                     <th>WhatsApp</th>
@@ -241,6 +248,38 @@ const AdminPage = () => {
                   ))}
                 </tbody>
               </table>
+
+              <div className="mobile-order-cards">
+                {orders.filter(o => o.whatsappNumber.includes(searchTerm)).map(order => (
+                  <div key={order._id} className="order-mobile-card">
+                    <div className="card-header">
+                      <span className="whatsapp">{order.whatsappNumber}</span>
+                      <span className="badge-paid">Paid</span>
+                    </div>
+                    <div className="card-details">
+                      <div><span>Mood:</span> {order.mood}</div>
+                      <div><span>Date:</span> {new Date(order.createdAt).toLocaleDateString()}</div>
+                      <div><span>Lang:</span> {order.language}</div>
+                      <div><span>Price:</span> ₹{order.totalPrice}</div>
+                    </div>
+                    <div className="card-footer">
+                      <select 
+                        className={`status-select status-${order.orderStatus.toLowerCase().replace(' ', '-')}`}
+                        value={order.orderStatus}
+                        onChange={(e) => updateStatus(order._id, e.target.value)}
+                      >
+                        <option>Pending</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                      </select>
+                      <div className="action-btns">
+                        <button onClick={() => { setSelectedOrder(order); setShowModal(true); }}><Eye size={18} /> Details</button>
+                        <button onClick={() => downloadFiles(order)}><Download size={18} /> Files</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         )}
@@ -251,7 +290,7 @@ const AdminPage = () => {
               <h2>Customer Base</h2>
             </div>
             <div className="table-responsive">
-              <table>
+              <table className="desktop-table">
                 <thead>
                   <tr>
                     <th>WhatsApp Number</th>
@@ -272,6 +311,23 @@ const AdminPage = () => {
                   })}
                 </tbody>
               </table>
+
+              <div className="mobile-order-cards">
+                {Array.from(new Set(orders.map(o => o.whatsappNumber))).map(phone => {
+                  const customerOrders = orders.filter(o => o.whatsappNumber === phone);
+                  return (
+                    <div key={phone} className="order-mobile-card">
+                      <div className="card-header">
+                        <span className="whatsapp">{phone}</span>
+                      </div>
+                      <div className="card-details">
+                        <div><span>Total Orders:</span> {customerOrders.length}</div>
+                        <div><span>Last Order:</span> {new Date(customerOrders[customerOrders.length-1].createdAt).toLocaleDateString()}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </section>
         )}
