@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Upload, Music, CreditCard, MessageCircle, Info } from 'lucide-react';
+import { Check, CreditCard, MessageCircle, Info } from 'lucide-react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './OrderPage.css';
@@ -28,10 +28,7 @@ const OrderPage = () => {
     instrumental: false
   });
 
-  const [files, setFiles] = useState({
-    photos: [],
-    voiceNote: null
-  });
+
 
   const [totalPrice, setTotalPrice] = useState(999);
 
@@ -60,14 +57,7 @@ const OrderPage = () => {
     setAddons({ ...addons, [addon]: !addons[addon] });
   };
 
-  const handleFileChange = (e) => {
-    const { name, files: selectedFiles } = e.target;
-    if (name === 'photos') {
-      setFiles({ ...files, photos: Array.from(selectedFiles) });
-    } else {
-      setFiles({ ...files, voiceNote: selectedFiles[0] });
-    }
-  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -109,13 +99,7 @@ const OrderPage = () => {
                 if (addons.instrumental) selectedAddons.push({ name: 'Instrumental', price: 299 });
                 data.append('addons', JSON.stringify(selectedAddons));
 
-                // Append Files
-                files.photos.forEach(file => {
-                  data.append('photos', file);
-                });
-                if (files.voiceNote) {
-                  data.append('voiceNote', files.voiceNote);
-                }
+
 
                 try {
                     const verifyRes = await axios.post(`${API_URL}/api/verify-payment`, data, {
@@ -306,32 +290,7 @@ const OrderPage = () => {
               </div>
             </div>
 
-            <div className="form-group">
-               <label><Upload size={18} /> Upload Photos (Max 10)</label>
-               <input 
-                 type="file" 
-                 name="photos" 
-                 multiple 
-                 accept="image/*"
-                 onChange={handleFileChange}
-               />
-               <small className="file-info">
-                 {files.photos.length > 0 ? `${files.photos.length} photos selected` : 'Select your favorite memories'}
-               </small>
-            </div>
 
-            <div className="form-group">
-               <label><Music size={18} /> Upload Voice Note (Optional)</label>
-               <input 
-                 type="file" 
-                 name="voiceNote" 
-                 accept="audio/*"
-                 onChange={handleFileChange}
-               />
-               <small className="file-info">
-                 {files.voiceNote ? files.voiceNote.name : 'Share a special message or tone'}
-               </small>
-            </div>
           </div>
         </div>
 
